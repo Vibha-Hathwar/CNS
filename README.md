@@ -7,7 +7,14 @@ Cryptography and Network Security Lab (7th sem)
 
 2. Write a program to perform the following using Hill cipher:
   i)	Encrypt a message M with a given key matrix of size 2X2 and 3X3
-  ii)	Decrypt the cipher text obtained in (i) by computing inverse of the respective key matrix
+  ii)	Decrypt the cipher text obtained in (i) by computing inverse of the respective key matrix.
+
+3.Perform encryption using mono-alphabetic cipher. The program should support the following:
+  i) Construct an input file named plaintext.txt (consisting of 1000 alphabets, without any space or special characters)
+  ii)	Encrypt the characters of plaintext.txt using any one key from (ii) and store the corresponding ciphertext characters in ciphertext.txt
+  iii)	Compute the frequency of occurrence of each alphabet in both plaintext.txt and ciphertext.txt and tabulate the results as follows
+  Frequency	Plaintext character	Ciphertext character
+  12.34     A                    X
 
 4. Write a program to perform encryption and decryption using transposition technique with column permutation given as key.
 

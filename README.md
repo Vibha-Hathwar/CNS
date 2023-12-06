@@ -15,3 +15,5 @@ Cryptography and Network Security Lab (7th sem)
 
 6. i)	Given 64-bit output of (i-1)th round of DES, 48-bit ith round key Ki and E table, find the 48-bit input for S-box.
   ii)	Given 48-bit input to S-box and permutation table P, find the 32-bit output Ri of ith round of DES algorithm.
+
+7. Consider the 128 bits initial key and expand it to 10 different keys each of size 128 bits using AES key expansion technique.

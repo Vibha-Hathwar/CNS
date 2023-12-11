@@ -22,9 +22,7 @@ string firstPermute(string input)
 {
     string res = "" ;
     for(int i=0 ; i<56 ; i++)
-    {
         res += input[permChoiceOne[i]-1];
-    }
     return res ;
 }
 

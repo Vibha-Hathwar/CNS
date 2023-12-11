@@ -97,7 +97,6 @@ string permute(string input)
         res += input[permTable[i]-1];
     return res;
 }
-
 int main()
 {
     int i;
@@ -118,28 +117,19 @@ int main()
         exit(1);
     }
     cout << "\n64-bit Binary Input = " << input << endl ;
-    cout << "key for ith round (Ki) = " << Ki << endl ;
-    
-    //cout <<"\nROUND FUNCTION OPERATION\n";
+    cout << "\nkey for ith round (Ki) = " << Ki <<": " << hex << bitset<48>(Ki).to_ulong()<< endl ;
     string Li_1 = input.substr(0,32);
     string Ri_1 = input.substr(32,32);
-    cout << "\nRight half of 64-bit input, Ri_1 = " << Ri_1 << endl;
-    
+    cout << "\nRight half of 64-bit input, Ri_1 = " << Ri_1<<": " << hex << bitset<32>(Ri_1).to_ulong() << endl;
     string R48 = expansionPermute(Ri_1);
-    cout << "Ri_1 after expansion permutation = " << R48 << endl;
-    
+    cout << "\nRi_1 after expansion permutation = " << R48 << " :  "<< hex << bitset<32>(Ri_1).to_ulong() << endl;
     string sBoxInput = XOR(R48, Ki);
-    cout << "\nInput to s-box : " << sBoxInput << endl << endl;
-    
-    //cout<<"S BOX OPERATION";
-    cout << "Left half of 64-bit input, Li_1 =" << Li_1 << endl;
-    
+    cout << "\nInput to s-box : " << sBoxInput <<": " << hex << bitset<48>(sBoxInput).to_ulong() << endl << endl;
+    cout << "Left half of 64-bit input, Li_1 =" << Li_1 <<": " << hex << bitset<32>(Li_1).to_ulong()<< endl;
     string sBoxOutput = substitution(sBoxInput);
-    cout << "\nS-Box output    = " << sBoxOutput << endl;
-    
+    cout << "\nS-Box output    = " << sBoxOutput << " : " << hex << bitset<32>(sBoxOutput).to_ulong() << endl;
     string P = permute(sBoxOutput);
-    cout << "\nPermuted output = " << P << endl;
-    
+    cout << "\nPermuted output = " << P  <<" : "<< hex << bitset<32>(P).to_ulong() << endl;
     string Ri = XOR(P, Li_1);
-    cout << "\nOutput of ith round (Ri) = " << Ri << endl << endl;
+    cout << "\nOutput of ith round (Ri) = " << Ri<<" : " << hex << bitset<32>(Ri).to_ulong() << endl << endl;
 }

@@ -119,22 +119,27 @@ int main()
     }
     cout << "\n64-bit Binary Input = " << input << endl ;
     cout << "key for ith round (Ki) = " << Ki << endl ;
+    
     //cout <<"\nROUND FUNCTION OPERATION\n";
     string Li_1 = input.substr(0,32);
-    //cout << "\nLeft half of 64-bit input, Li_1 =" << Li_1 << endl;
     string Ri_1 = input.substr(32,32);
     cout << "\nRight half of 64-bit input, Ri_1 = " << Ri_1 << endl;
+    
     string R48 = expansionPermute(Ri_1);
     cout << "Ri_1 after expansion permutation = " << R48 << endl;
+    
     string sBoxInput = XOR(R48, Ki);
     cout << "\nInput to s-box : " << sBoxInput << endl << endl;
+    
     //cout<<"S BOX OPERATION";
-    //cout << "\nLi_1              : " << Li_1 << endl;
     cout << "Left half of 64-bit input, Li_1 =" << Li_1 << endl;
+    
     string sBoxOutput = substitution(sBoxInput);
     cout << "\nS-Box output    = " << sBoxOutput << endl;
+    
     string P = permute(sBoxOutput);
     cout << "\nPermuted output = " << P << endl;
+    
     string Ri = XOR(P, Li_1);
     cout << "\nOutput of ith round (Ri) = " << Ri << endl << endl;
 }

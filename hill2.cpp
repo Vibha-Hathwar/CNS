@@ -19,25 +19,24 @@ int findDet(int m[3][3] , int n)
         return mod26(det);
 }
 
-int findDetInverse(int R , int D = 26)
+int findDetInverse(int r2 , int r1 = 26)
 {
     int i = 0 ;
-    int p[100] = {0,1};
+    int t[100] = {0,1};
     int q[100] = {0} ;
-    while(R!=0)
+    while(r2!=0)
     {
-        q[i] = D/R ;
-        int oldD = D ;
-        D = R ;
-        R = oldD%R ;
+        q[i] = r1/r2 ;
+        int r = r1 ;
+        r1 = r2 ;
+        r2 = r % r2 ;
         if(i>1)
-            p[i] = mod26(p[i-2] - p[i-1]*q[i-2]) ;
+            t[i] = mod26(t[i-2] - t[i-1]*q[i-2]) ;
         i++ ;
     }
     if (i == 1) return 1;
-    else return p[i] = mod26(p[i-2] - p[i-1]*q[i-2]) ;
+    else return t[i] = mod26(t[i-2] - t[i-1]*q[i-2]) ;
 }
-
 void multiplyMatrices(int a[1000][3] , int a_rows , int a_cols ,  int b[1000][3] , int b_rows , int b_cols , int res[1000][3])
 {
     for(int i=0 ; i < a_rows ; i++)

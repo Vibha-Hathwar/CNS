@@ -37,7 +37,7 @@ void freq(string p,string c){
         if(isalpha(i))
             f[i]++;
     cout<<"Freq\t"<<"Plaintext\t"<<"Ciphertext\t"<<endl;
-    for(auto i:m)
+    for(auto i:f)
         cout<<i.second<<"\t\t"<<i.first<<"\t\t"<<mc[i.first]<<endl;
 }
 int main()

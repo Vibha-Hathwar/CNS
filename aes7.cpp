@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 unsigned long long sbox[16][16] = {
@@ -20,24 +20,20 @@ unsigned long long sbox[16][16] = {
     { 0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68, 0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16 }
 };
 
-unsigned long long Rcon[11] = {
-    0x00000000, 0x01000000, 0x02000000, 0x04000000,
+unsigned long long Rcon[10] = {
+    0x01000000, 0x02000000, 0x04000000,
     0x08000000, 0x10000000, 0x20000000, 0x40000000,
     0x80000000, 0x1b000000, 0x36000000
 };
 
 string w[44];
 
-string rotLeft(string word)
-{
+string rotLeft(string word){
     return word.substr(8) + word.substr(0,8);
 }
-
 string SBoxFun(string word){
     string res = "";
-
-    for(int i=0; i<4; i++)
-    {
+    for(int i=0; i<4; i++){
         string byte = word.substr(i*8, 8);
         int row = bitset<4>( byte.substr(0,4) ).to_ulong();
         int col = bitset<4>( byte.substr(4,4) ).to_ulong();
@@ -45,68 +41,54 @@ string SBoxFun(string word){
     }
     return res;
 }
-
-string XOR(string x, string y)
-{
+string XOR(string x, string y){
     string res = "";
     for(int i=0; i<x.length(); i++)
         res += (x[i] == y[i]) ? "0" : "1";
     return res;
 }
-string bin_to_hex(string binary) {
-    binary = string(binary.length() % 4 ? 4 - binary.length() % 4 : 0, '0') + binary;
-    unordered_map<string, char> hex_dict = {
-        {"0000", '0'}, {"0001", '1'}, {"0010", '2'}, {"0011", '3'},
-        {"0100", '4'}, {"0101", '5'}, {"0110", '6'}, {"0111", '7'},
-        {"1000", '8'}, {"1001", '9'}, {"1010", 'A'}, {"1011", 'B'},
-        {"1100", 'C'}, {"1101", 'D'}, {"1110", 'E'}, {"1111", 'F'}
-    };
-    string hexadecimal;
-    for (size_t i = 0; i < binary.length(); i += 4) {
-        string group = binary.substr(i, 4);
-        hexadecimal += hex_dict[group];
-    }
-    return hexadecimal;
-}
-
-int main()
-{
-    //get 128 bit key
+int main(int args , char *argv[]){
     unsigned long long hexkey1, hexkey2;
-    cout << "\nEnter first 64-bit key in hexadecimal(16-digits) : " ;
-    cin >> hex >> hexkey1;
+    char a[128];
+    string msg,key;
+    cout << "Enter the key message: ";
+    cin.getline(a,100);
+    msg.append(a);
 
-    cout << "\nEnter next 64-bit key in hexadecimal(16-digits) : " ;
-    cin >> hex >> hexkey2;
-
-    string key = bitset<64>(hexkey1).to_string() + bitset<64>(hexkey2).to_string();
-    cout << "Binary key (k) \t: " << key << endl;
-    cout << "keyLen : " << key.length() << endl;
-   
-    //initializing w
+    cout << bitset<8>((int) ' ' ).to_string();
+    for (int i= 0; i<msg.length();i++)
+        key+= bitset<8>((int) msg[i]).to_string();
+    cout << "Key in hex: "
+         << hex
+         << bitset<32>(key.substr(0,32)).to_ullong()
+         << bitset<32>(key.substr(32,32)).to_ullong()
+         << bitset<32>(key.substr(64,32)).to_ullong()
+         << bitset<32>(key.substr(96,32)).to_ullong()
+         <<endl;
+    while (key.length()<128)
+        key+='0';
+    cout << "key in binary : " << key << endl;
     for(int i=0; i<4; i++)
         w[i] = key.substr(i*32,32);
-
-    for(int i=4; i<44; i++)
-    {
-        string first = w[i-4];
-        string second = w[i-1];
-        if(i % 4 == 0)
-        {
-            second = rotLeft(second);
-            second = SBoxFun(second);
-            string tmp = bitset<32>(Rcon[i/4]).to_string();
-            second = XOR(second, tmp);
-        }
+    for(int i=4; i<44; i++){
+            string first = w[i-4];
+            string second = w[i-1];
+            if(i % 4 == 0){
+                second = rotLeft(second);
+                second = SBoxFun(second);
+                string tmp = bitset<32>(Rcon[i/4-1]).to_string();
+                second = XOR(second, tmp);
+            }
         w[i] = XOR(first, second);
     }
-
-    //setting keys and printing
     string keys[11] = {""};
     for(int i=0; i<44; i++)
         keys[i/4] += w[i];
-    for(int i=0; i<11; i++)
-        cout << "Key " << i << ": " << bin_to_hex(keys[i]) << endl;
-
+    for(int i=0; i<11; i++){
+        for(int j=0; j<16;j++)
+            cout << setfill('0') <<setw(2)<<hex<<bitset<8>(keys[i].substr(j*8,8)).to_ulong() <<" ";
+        cout <<endl;
+    }
+    cout << endl;
     return 0;
 }

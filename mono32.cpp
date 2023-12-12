@@ -28,14 +28,14 @@ string encrypt(string s,map<char,char> m){
         else e+=" ";
     return e;
 }
-void freq(string s,string a){
-    map<char,int> m;
+void freq(string p,string c){
+    map<char,int> f;
     map<char,char> mc;
-    for(int i=0;i<s.size();i++)
-        mc[s[i]]=a[i];
-    for(auto i:s)
+    for(int i=0;i<p.size();i++)
+        mc[p[i]]=c[i];
+    for(auto i:p)
         if(isalpha(i))
-            m[i]++;
+            f[i]++;
     cout<<"Freq\t"<<"Plaintext\t"<<"Ciphertext\t"<<endl;
     for(auto i:m)
         cout<<i.second<<"\t\t"<<i.first<<"\t\t"<<mc[i.first]<<endl;

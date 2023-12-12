@@ -58,22 +58,21 @@ int main()
        cout<<i.second<<" ";
    cout<<endl;
    ifstream myfile ("plaintext.txt");
-   string s="";   
+   string p="";   
    if ( myfile.is_open() ) 
        while(myfile)
-           s+=myfile.get();
-   cout<<"Plain text (from file) : "<<s<<endl;
-   string enc=encrypt(s,m);
-   cout<<"Encrypted text (to file) : "<<enc<<endl<<endl;
-   fstream file;
-   file.open("ciphertext.txt", ios_base::out);
+           p+=myfile.get();
+   cout<<"Plain text (from file) : "<<p<<endl;
+   string c=encrypt(p,m);
+   cout<<"Encrypted text (to file) : "<<c<<endl<<endl;
+   fstream file("ciphertext.txt", ios_base::out);
    if(!file.is_open())
    {
        cout<<"Unable to open the file.\n";
        return 0;
    }
-   freq(s,enc);
-   file<<enc;
+   freq(p,c);
+   file<<c;
    file.close();
    return 0;
 }

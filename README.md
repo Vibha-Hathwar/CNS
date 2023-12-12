@@ -24,3 +24,6 @@ Cryptography and Network Security Lab (7th sem)
   ii)	Given 48-bit input to S-box and permutation table P, find the 32-bit output Ri of ith round of DES algorithm.
 
 7. Consider the 128 bits initial key and expand it to 10 different keys each of size 128 bits using AES key expansion technique.
+8. C8. onsider a message of 16 bytes (128 bits) and perform XOR operation with an initial round key [WO, WI, W2, W3] of size 128 bits to generate a state array in AES. W.r.t generated state array of size 128 bits, perform the following operations in each round.
+  i. Byte substitution using S-Box
+  ii. Shift Rows using left shift
